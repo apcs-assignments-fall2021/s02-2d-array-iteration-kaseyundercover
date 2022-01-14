@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class MyMain {
     // Returns the String that shows up latest alphabetically
     // in a normal 1D String array
@@ -7,8 +9,14 @@ public class MyMain {
     //      int x = "apple".compareTo("banana"); // x is negative
     //      int y = "banana".compareTo("apple"); // y is positive
     public static String findLastWord(String[] arr) {
-        // YOUR CODE HERE
-        return "";
+        String a = "a";
+        for (int i = 0; i<arr.length; i++){
+            if (arr[i].compareTo(a)>0){
+                a = arr[i];
+
+            }
+        }
+        return a;
     }
 
     // Given a 2D array, return an 1D array of the last word
@@ -16,9 +24,19 @@ public class MyMain {
     // You can assume that the matrix will not be empty
     // Hint: use the previous method to help yourself!
     public static String[] findLastWord2D(String[][] mat) {
-        // YOUR CODE HERE
-        return null;
-    }
+        String a = "a";
+        String arr[] = new String[3];
+            for (int row = 0; row < mat.length; row++) {
+                String[] arr2 = mat[row];
+                findLastWord(arr2);
+                arr[row]=findLastWord(arr2) ;
+                    }
+        return arr;
+                }
+
+
+
+
 
     // Given a 2D array and some column index col
     // finds the number of Strings in the specified column
@@ -30,19 +48,31 @@ public class MyMain {
     // Hint: remember how the indexOf() method works?
     // alternatively, consider the contains() method
     public static int appleCounter(String[][] mat, int col) {
-        // YOUR CODE HERE
-        return -1;
+        int apple = 0;
+        for(int row = 0; row<mat.length; row++){
+            if (mat[row][col].contains("apple")==true){
+                apple++;
+            }
+        }
+        return apple;
     }
 
     // Given a 2D array, return the column number corresponding
     // to the column that contains the most Strings containing
     // the word "apple"
-
     // Hint: use your previous method!
     // Hint 2: you might need to loop through the columns!
     public static int findMostAppleColumn(String[][] mat) {
-        // YOUR CODE HERE
-        return -1;
+        int applenumber = 0;
+        int columnnumber = 0;
+        for (int col = 0; col < mat[0].length; col++) {
+            if (appleCounter(mat, col) > applenumber) {
+                applenumber++;
+                columnnumber = col;
+            }
+
+        }
+        return columnnumber;
     }
 
 
@@ -70,8 +100,22 @@ public class MyMain {
     //       from top to bottom
 
     public static int[][] pascal(int height) {
-        // YOUR CODE HERE
-        return null;
+        int mat[][] = new int[height][height];
+        for (int row = 0; row < mat.length; row++) {
+            for (int col = 0; col < mat[0].length; col++) {
+                mat[row][0] = 1;
+            }
+            for (int i =0; i<mat.length;i++){
+                mat[i][i]=1;
+                for (int j = 1; j<i;j++){
+                    mat[i][j]=mat[i-1][j]+mat[i-1][j-1];
+
+                }
+            }
+
+
+        }
+        return mat;
     }
 
 
@@ -107,8 +151,20 @@ public class MyMain {
     // * do you see any pattern for the row and col indexes for a diagonal?
     // * can you use a for loop that goes through that pattern?
     public static boolean isMagic(int[][] mat) {
-        // YOUR CODE HERE
-        return false;
+        int row = 0;
+            for (int col = 0; col < mat[0].length; col++) {
+                int x = mat[row][col];
+                int c = 0;
+                for (int i = 0; i < mat.length; i++) {
+                    int z = mat[c][i];
+                    if (z!=x){
+                        return false;
+                    }
+                }
+            }
+
+
+        return true;
     }
 
 

@@ -151,21 +151,43 @@ public class MyMain {
     // * do you see any pattern for the row and col indexes for a diagonal?
     // * can you use a for loop that goes through that pattern?
     public static boolean isMagic(int[][] mat) {
-        int row = 0;
-            for (int col = 0; col < mat[0].length; col++) {
-                int x = mat[row][col];
-                int c = 0;
-                for (int i = 0; i < mat.length; i++) {
-                    int z = mat[c][i];
-                    if (z!=x){
-                        return false;
-                    }
-                }
-            }
+        int x = 0;
+        int y = 0;
 
+        for (int i = 0; i < mat.length; i++) {
+            x = x + mat[i][i];
+            y = y + mat[i][i];
+        }
+        if (x != y) {
+            return false;
+        }
+        for (int j = 0; j < mat.length; j++) {
+            int a = 0;
+            int b = 0;
+            for (int c = 0; c < mat.length; c++) {
+                a = a + mat[j][c];
+                b = b + mat[c][j];
+            }
+            if (a != b || b != x || x != y || y != b || a!=y || a!=x) {
+                return false;
+            }
+        }
 
         return true;
     }
+//                for (int i = 0; i < mat.length; i++) {
+//                    int z = mat[c][i];
+//                    if (z!=x){
+//                        return false;
+//                        //2x for row
+//                        //2x for col
+//                        //1x for diagonal
+//                        //1x for diagonal
+
+
+
+
+
 
 
     public static void main(String[] args) {
